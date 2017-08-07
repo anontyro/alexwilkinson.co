@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
-namespace alexwilkinson
+namespace websites
 {
     public partial class AlexwilkinsonContext : DbContext
     {

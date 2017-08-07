@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace alexwilkinson
+namespace websites
 {
     public partial class Author
     {
