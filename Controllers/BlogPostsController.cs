@@ -27,6 +27,20 @@ namespace websites.Controllers
             return _context.BlogPost;
         }
 
+        // GET: api/BlogPosts/range/
+        [HttpGet("range/{page?}/{amount?}")]
+        public IEnumerable<BlogPost> GetBlogPostInRange([FromRoute]int page = 0, int amount = 25)
+        {
+
+            var postList = _context.BlogPost
+                .Where(m => m.GetDraft() == 0)
+                .OrderByDescending(m => m.getPublish())
+                .Skip(page * amount)
+                .Take(amount);
+
+            return postList;
+        }
+
         // GET: api/BlogPosts/5
         [HttpGet("{id}")]
         public async Task<IActionResult> GetBlogPost([FromRoute] int id)
@@ -42,6 +56,16 @@ namespace websites.Controllers
             {
                 return NotFound();
             }
+
+            return Ok(blogPost);
+        }
+
+        // GET: api/BlogPosts/count/
+        [HttpGet("count")]
+        public  IActionResult GetBlogPostTotal()
+        {
+
+            var blogPost =  _context.BlogPost.Count();
 
             return Ok(blogPost);
         }

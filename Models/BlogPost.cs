@@ -16,4 +16,17 @@ namespace websites
         public string Slug { get; set; }
         public string Title { get; set; }
     }
+    //method calls
+    public partial class BlogPost
+    {
+        public int GetDraft()
+        {
+            return Convert.ToInt32(Draft);
+        }
+
+        public DateTime getPublish()
+        {
+            return Convert.ToDateTime(Publish);
+        }
+    }
 }
