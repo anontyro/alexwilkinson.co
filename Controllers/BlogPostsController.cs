@@ -34,7 +34,7 @@ namespace websites.Controllers
 
             var postList = _context.BlogPost
                 .Where(m => m.GetDraft() == 0)
-                .OrderByDescending(m => m.getPublish())
+                .OrderByDescending(m => m.GetPublish())
                 .Skip(page * amount)
                 .Take(amount);
 
@@ -66,6 +66,20 @@ namespace websites.Controllers
         {
 
             var blogPost =  _context.BlogPost.Count();
+
+            return Ok(blogPost);
+        }
+
+        // GET: api/BlogPosts/latest/
+        [HttpGet("latest")]
+        public IActionResult GetBlogPostLatest()
+        {
+
+            var blogPost = _context.BlogPost
+                .Where(m => m.GetDraft() == 0)
+                .OrderByDescending(m => m.GetPublish())
+                .Take(1)
+                ;
 
             return Ok(blogPost);
         }

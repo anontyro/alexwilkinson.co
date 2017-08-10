@@ -24,7 +24,7 @@ namespace websites
             return Convert.ToInt32(Draft);
         }
 
-        public DateTime getPublish()
+        public DateTime GetPublish()
         {
             return Convert.ToDateTime(Publish);
         }
