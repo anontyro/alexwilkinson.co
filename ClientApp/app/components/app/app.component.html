@@ -1,10 +1,16 @@
-<div class='container-fluid'>
+<div class='container-fluid root-container' >
 
-        <div class='col-sm-3'>
+        <div class='col-sm-3' *ngIf="false">
             <nav-menu></nav-menu>
         </div>
-        <div class='col-sm-9 body-content'>
+        <div class='col-xs-12 body-content' >
             <router-outlet></router-outlet>
         </div>
+    <br /><br />
+    <div class="footer-content">
+        <app-footer></app-footer>
+    </div>
   
 </div>
+
+<!--[ngStyle]="{'background-image': 'url(~/static/images/banner.jpg);'}"-->

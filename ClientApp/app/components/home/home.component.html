@@ -1,4 +1,16 @@
-<h1>Home</h1>
-<div>
-    {{latestPost | json}}
+<div class="home-container">
+    <div id="homepage-main-text">
+        <h1 class="myFadeIn">Hi! I'm <span class="highligher">Alex</span> a backend developer with some design flair</h1>
+        <h3 class="slideDown">
+            Located in <span class="highligher">Singapore</span> I have experience with everything from Android
+            development to CSS. I am largely back-end focuses as I have spent most
+            of my time with <span class="highligher">Java SE & EE</span> using Eclipse.
+        </h3>
+    </div>
 </div>
+
+<div class="latest-post" *ngIf="latestPost">
+    <h3>Latest: <span class="highligher"> {{latestPost[0].title}} </span> </h3>
+</div>
+
+<!-- {{latestPost | json}}  -->

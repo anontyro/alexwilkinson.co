@@ -1,0 +1,19 @@
+﻿*{
+    margin: 0px 0px 0px 0px;
+    color: rgb(153, 154, 156);
+}
+
+a:hover {
+    color: #4196ea !important;
+    text-decoration: none;
+}
+p {
+    color: lightslategrey;
+}
+.highligher {
+    color: #4196ea;
+}
+body {
+    background-color: rgb(41, 41, 41);
+}
+

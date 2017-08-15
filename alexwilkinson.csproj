@@ -39,6 +39,11 @@
     <!-- Files not to publish (note that the 'dist' subfolders are re-added below) -->
     <Content Remove="ClientApp\**" />
   </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="wwwroot\static\css\main-style.css" />
+    <Content Include="wwwroot\static\images\banner.jpg" />
+  </ItemGroup>
   <Target Name="RunWebpack" AfterTargets="ComputeFilesToPublish">
     <!-- As part of publishing, ensure the JS resources are freshly built in production mode -->
     <Exec Command="npm install" />

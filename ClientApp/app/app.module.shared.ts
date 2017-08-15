@@ -6,6 +6,8 @@ import { NavMenuComponent } from './components/navmenu/navmenu.component';
 import { HomeComponent } from './components/home/home.component';
 import { FetchDataComponent } from './components/fetchdata/fetchdata.component';
 import { CounterComponent } from './components/counter/counter.component';
+import { FooterComponent } from './components/footer/footer.component';
+
 
 export const sharedConfig: NgModule = {
     bootstrap: [ AppComponent ],
@@ -14,6 +16,7 @@ export const sharedConfig: NgModule = {
         NavMenuComponent,
         CounterComponent,
         FetchDataComponent,
+        FooterComponent,
         HomeComponent
     ],
     imports: [
