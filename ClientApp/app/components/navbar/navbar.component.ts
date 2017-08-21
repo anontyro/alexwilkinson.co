@@ -1,11 +1,11 @@
 import { Component, Output, OnInit, EventEmitter } from '@angular/core';
 
 @Component({
-    selector: 'nav-menu',
-    templateUrl: './navmenu.component.html',
-    styleUrls: ['./navmenu.component.css']
+    selector: 'app-nav-bar',
+    templateUrl: './navbar.component.html',
+    styleUrls: ['./navbar.component.css']
 })
-export class NavMenuComponent implements OnInit {
+export class NavBarComponent implements OnInit {
     @Output()
     sideNavClosed: EventEmitter<any> = new EventEmitter<any>();
 
@@ -16,7 +16,7 @@ export class NavMenuComponent implements OnInit {
 
 
     public closeSideNav() {
-        this.sideNavClosed.emit(false); 
+        this.sideNavClosed.emit(true); 
     }
 
 

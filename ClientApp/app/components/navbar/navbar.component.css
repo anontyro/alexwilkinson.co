@@ -1,0 +1,40 @@
+.user-detail-above-nav {
+    text-align: center;
+}
+
+.user-detail-above-nav a {
+    color: #4196ea;
+}
+
+.user-detail-above-nav a:hover {
+    color: lightslategrey;
+}
+
+.navbar-inverse {
+    background-color: transparent;
+    border: 0px;
+    margin-bottom: 20px;
+    background-image: none;
+}
+
+ul.nav a {
+    text-decoration: none;
+    background-color: transparent !important;
+    color: #778899 !important;
+    font-size: 22px;
+}
+
+ul.nav a:hover {
+    color: #526D87 !important;
+    border-width: 0px;
+    border-style: solid;
+    background-color: transparent;
+}
+
+.my-brand-alex {
+    float: left;
+}
+
+.my-navbar-alex{
+    margin-top: 5vh;
+}

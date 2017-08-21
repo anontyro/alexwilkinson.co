@@ -6,4 +6,18 @@ import { Component } from '@angular/core';
     styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+
+    private isNavOpen: boolean = false;
+
+
+
+    public changeSideNavState(changeTo: boolean) {
+        console.log(changeTo);
+        if (changeTo == true) {
+            this.isNavOpen = true;
+        } else {
+            this.isNavOpen = false;
+        }
+    }
+
 }

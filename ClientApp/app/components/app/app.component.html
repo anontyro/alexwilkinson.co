@@ -1,7 +1,7 @@
 <div class='container-fluid root-container' >
-
-        <div class='col-sm-3' *ngIf="false">
-            <nav-menu></nav-menu>
+        <app-nav-bar (sideNavClosed)="changeSideNavState($event)"></app-nav-bar>
+        <div>
+            <nav-menu (sideNavClosed)="changeSideNavState($event)" *ngIf="isNavOpen"></nav-menu>
         </div>
         <div class='col-xs-12 body-content' >
             <router-outlet></router-outlet>
