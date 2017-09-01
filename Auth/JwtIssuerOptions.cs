@@ -9,11 +9,11 @@ namespace alexwilkinson.Auth
 {
     public class JwtIssuerOptions
     {
-
+        public string Path { get; set; } = "/token";
         /// <summary>
         /// 4.1.1.  "iss" (Issuer) Claim - The "iss" (issuer) claim identifies the principal that issued the JWT.
         /// </summary>
-        public string Issuer { get; set; } = "http://localhost:55015/";
+        public string Issuer { get; set; } 
 
         /// <summary>
         /// 4.1.2.  "sub" (Subject) Claim - The "sub" (subject) claim identifies the principal that is the subject of the JWT.
@@ -23,7 +23,7 @@ namespace alexwilkinson.Auth
         /// <summary>
         /// 4.1.3.  "aud" (Audience) Claim - The "aud" (audience) claim identifies the recipients that the JWT is intended for.
         /// </summary>
-        public string Audience { get; set; } = "http://localhost/";
+        public string Audience { get; set; }
 
         /// <summary>
         /// 4.1.4.  "exp" (Expiration Time) Claim - The "exp" (expiration time) claim identifies the expiration time on or after which the JWT MUST NOT be accepted for processing.
@@ -56,14 +56,8 @@ namespace alexwilkinson.Auth
         /// <summary>
         /// The signing key to use when generating tokens.
         /// </summary>
-        public SigningCredentials SigningCredentials { get; set; } = new SigningCredentials(GetSecretKey(), SecurityAlgorithms.HmacSha256);
+        public SigningCredentials SigningCredentials { get; set; } 
 
-        public static SymmetricSecurityKey GetSecretKey()
-        {
-            const string secretKey = "006ED5DC3AB6CD0B73E30C9EDDEE9F07F5AEE1C30AE11F06C7DA5BC08E21A4130141EEE5F3A2";
-            var signingKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(secretKey));
-            return signingKey;
-        }
 
 
     }

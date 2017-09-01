@@ -56,7 +56,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="wwwroot\" />
+    <Content Include="wwwroot" />
 
   </ItemGroup>
   <Target Name="RunWebpack" AfterTargets="ComputeFilesToPublish">

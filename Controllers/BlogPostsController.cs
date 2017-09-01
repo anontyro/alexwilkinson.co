@@ -5,7 +5,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using websites; 
+using websites;
+using Microsoft.AspNetCore.Authorization;
 
 namespace websites.Controllers
 {
@@ -61,6 +62,7 @@ namespace websites.Controllers
         }
 
         // GET: api/BlogPosts/count/
+        [Authorize]
         [HttpGet("count")]
         public  IActionResult GetBlogPostTotal()
         {

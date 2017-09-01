@@ -13,11 +13,26 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using alexwilkinson.Auth;
+using Microsoft.Extensions.Options;
 
 namespace websites
 {
     public class Startup
     {
+
+        private static string secretKey = "006ED5DC3AB6CD0B73E30C9EDDEE9F07F5AEE1C30AE11F06C7DA5BC08E21A4130141EEE5F3A2";
+        private static string _Issuer = "Tradexc";
+        private static string _Audience = "People";
+        private static SymmetricSecurityKey signingKey;
+
+        public Startup(IConfiguration configuration)
+        {
+            Configuration = (IConfigurationRoot) configuration;
+            signingKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(secretKey));
+        }
+
+        //end of security
+
         public Startup(IHostingEnvironment env)
         {
             var builder = new ConfigurationBuilder()
@@ -33,16 +48,54 @@ namespace websites
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddSiteAuthorization();
+            var connection = Connection.getConnection();
+            services.AddDbContext<AlexwilkinsonContext>(options => options.UseMySql(connection));
 
-            services.AddSingleton<IJwtFactory, JwtFactory>();
+
+            //services.AddSiteAuthorization();
+            //services.AddSingleton<IJwtFactory, JwtFactory>();
 
             
             // Add framework services.
             services.AddMvc();
 
-            var connection = Connection.getConnection();
-            services.AddDbContext<AlexwilkinsonContext>(options => options.UseMySql(connection));
+            //securit stuff
+            var tokenValidationParameters = new TokenValidationParameters
+            {
+                //The signing key must match !
+                ValidateIssuerSigningKey = true,
+                IssuerSigningKey = signingKey,
+
+                //Validate the JWT Issuer (iss) claim
+                ValidateIssuer = true,
+                ValidIssuer = _Issuer,
+
+                //validate the JWT Audience (aud) claim
+
+                ValidateAudience = true,
+                ValidAudience = _Audience,
+
+                //validate the token expiry
+                ValidateLifetime = true,
+
+                // If you  want to allow a certain amout of clock drift
+                ClockSkew = TimeSpan.Zero
+            };
+
+            services.AddAuthentication(o =>
+            {
+                o.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                o.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+
+            }).AddJwtBearer(options =>
+            {
+                options.TokenValidationParameters = tokenValidationParameters;
+            }).AddCookie(options =>
+            {
+                options.ExpireTimeSpan = TimeSpan.FromDays(150);
+                options.LoginPath = "/Account/Login";
+                options.LogoutPath = "/Account/LogOff";
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -50,6 +103,18 @@ namespace websites
         {
 
             app.UseAuthentication();
+
+            //security stuff
+
+            var jwtOptions = new JwtIssuerOptions
+            {
+                Audience = _Audience,
+                Issuer = _Issuer,
+                SigningCredentials = new SigningCredentials(signingKey, SecurityAlgorithms.HmacSha256)
+            };
+            app.UseJWTTokenProviderMiddleware(Options.Create(jwtOptions));
+
+            //end sec stuff
 
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
