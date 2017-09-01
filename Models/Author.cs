@@ -1,16 +1,25 @@
-﻿using System;
+﻿using Microsoft.AspNet.Identity.EntityFramework;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace websites
 {
     public partial class Author
     {
-        public int Authorid { get; set; }
-        public int Authoractive { get; set; }
-        public string Authoremail { get; set; }
-        public string Authorfirstname { get; set; }
-        public string Authorlastname { get; set; }
-        public string Authorpassword { get; set; }
-        public string Authorusername { get; set; }
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        public int Id { get; set; }
+        public int AuthorActive { get; set; }
+        [ForeignKey("AuthorAccess")]
+        public int AuthorAccess { get; set; }
+        [Required]
+        public string AuthorEmail { get; set; }
+        public string AuthorFirstname { get; set; }
+        public string AuthorLastname { get; set; }
+        [Required]
+        public string AuthorPassword { get; set; }
+        public string AuthorUsername { get; set; }
     }
 }

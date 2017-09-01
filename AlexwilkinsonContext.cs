@@ -1,64 +1,94 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
+using alexwilkinson.Models;
 
 namespace websites
 {
     public partial class AlexwilkinsonContext : DbContext
     {
-        public virtual DbSet<Author> Author { get; set; }
         public virtual DbSet<BlogPost> BlogPost { get; set; }
         public virtual DbSet<Portfolio> Portfolio { get; set; }
 
-
         public AlexwilkinsonContext(DbContextOptions<AlexwilkinsonContext> options) : base(options) { }
+
+        public AlexwilkinsonContext CreateDbContext(string[] args)
+        {
+            var builder = new DbContextOptionsBuilder<AlexwilkinsonContext>();
+            builder.UseMySql(Connection.getConnection());
+            return new AlexwilkinsonContext(builder.Options);
+        }
+
+        public DbSet<AuthorAccess> AuthorAccess { get; set; }
+        public DbSet<Author> Author { get; set; }
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Author>(entity =>
+            //modelBuilder.Entity<AuthorAccess>(entity =>
+            //{
+            //    entity.ToTable("author_access");
+
+            //    entity.HasIndex(e => e.AuthorAccessId)
+            //        .IsUnique();
+
+            //    entity.HasIndex(e => e.AccessEnabled);
+            //});
+
+            modelBuilder.Entity<AuthorAccess>(entity =>
+            {
+
+            });
+
+            modelBuilder.Entity<Author>(entity => 
             {
                 entity.ToTable("author");
-
-                entity.HasIndex(e => e.Authoremail)
-                    .HasName("authoremail_UNIQUE")
-                    .IsUnique();
-
-                entity.HasIndex(e => e.Authorusername)
-                    .HasName("authorusername_UNIQUE")
-                    .IsUnique();
-
-                entity.Property(e => e.Authorid)
-                    .HasColumnName("authorid")
-                    .HasColumnType("int(11)");
-
-                entity.Property(e => e.Authoractive)
-                    .HasColumnName("authoractive")
-                    .HasColumnType("int(11)")
-                    .HasDefaultValueSql("0");
-
-                entity.Property(e => e.Authoremail)
-                    .IsRequired()
-                    .HasColumnName("authoremail")
-                    .HasColumnType("varchar(45)");
-
-                entity.Property(e => e.Authorfirstname)
-                    .HasColumnName("authorfirstname")
-                    .HasColumnType("varchar(45)");
-
-                entity.Property(e => e.Authorlastname)
-                    .HasColumnName("authorlastname")
-                    .HasColumnType("varchar(45)");
-
-                entity.Property(e => e.Authorpassword)
-                    .IsRequired()
-                    .HasColumnName("authorpassword")
-                    .HasColumnType("varchar(45)");
-
-                entity.Property(e => e.Authorusername)
-                    .IsRequired()
-                    .HasColumnName("authorusername")
-                    .HasColumnType("varchar(45)");
             });
+
+            //modelBuilder.Entity<Author>(entity =>
+            //{
+            //    entity.ToTable("author");
+
+            //    entity.HasIndex(e => e.AuthorEmail)
+            //        .HasName("authoremail_UNIQUE")
+            //        .IsUnique();
+
+            //    entity.HasIndex(e => e.AuthorUsername)
+            //        .HasName("authorusername_UNIQUE")
+            //        .IsUnique();
+
+            //    entity.Property(e => e.AuthorId)
+            //        .HasColumnName("authorid")
+            //        .HasColumnType("int(11)");
+
+            //    entity.Property(e => e.AuthorActive)
+            //        .HasColumnName("authoractive")
+            //        .HasColumnType("int(11)")
+            //        .HasDefaultValueSql("0");
+
+            //    entity.Property(e => e.AuthorEmail)
+            //        .IsRequired()
+            //        .HasColumnName("authoremail")
+            //        .HasColumnType("varchar(45)");
+
+            //    entity.Property(e => e.AuthorFirstname)
+            //        .HasColumnName("authorfirstname")
+            //        .HasColumnType("varchar(45)");
+
+            //    entity.Property(e => e.AuthorLastname)
+            //        .HasColumnName("authorlastname")
+            //        .HasColumnType("varchar(45)");
+
+            //    entity.Property(e => e.AuthorPassword)
+            //        .IsRequired()
+            //        .HasColumnName("authorpassword")
+            //        .HasColumnType("varchar(45)");
+
+            //    entity.Property(e => e.AuthorUsername)
+            //        .IsRequired()
+            //        .HasColumnName("authorusername")
+            //        .HasColumnType("varchar(45)");
+            //});
 
             modelBuilder.Entity<BlogPost>(entity =>
             {

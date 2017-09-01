@@ -241,3 +241,4 @@ _Pvt_Extensions
 
 Connection
 node_modules
+/Migrations
