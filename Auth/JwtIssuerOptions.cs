@@ -56,7 +56,14 @@ namespace alexwilkinson.Auth
         /// <summary>
         /// The signing key to use when generating tokens.
         /// </summary>
-        public SigningCredentials SigningCredentials { get; set; }
+        public SigningCredentials SigningCredentials { get; set; } = new SigningCredentials(GetSecretKey(), SecurityAlgorithms.HmacSha256);
+
+        public static SymmetricSecurityKey GetSecretKey()
+        {
+            const string secretKey = "006ED5DC3AB6CD0B73E30C9EDDEE9F07F5AEE1C30AE11F06C7DA5BC08E21A4130141EEE5F3A2";
+            var signingKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(secretKey));
+            return signingKey;
+        }
 
 
     }

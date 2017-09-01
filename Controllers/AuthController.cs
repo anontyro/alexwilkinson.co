@@ -8,6 +8,11 @@ using websites;
 using alexwilkinson.Auth;
 using Newtonsoft.Json;
 using Microsoft.Extensions.Options;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using System.Security.Claims;
+using System.IdentityModel.Tokens.Jwt;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 namespace alexwilkinson.Controllers
 {
@@ -16,21 +21,10 @@ namespace alexwilkinson.Controllers
     public class AuthController : Controller
     {
         private readonly AlexwilkinsonContext _context;
-        private readonly JwtFactory _jwtFactory;
-        private readonly JsonSerializerSettings _serializerSettings;
-        private readonly JwtIssuerOptions _jwtOptions;
 
-        public AuthController(AlexwilkinsonContext context, IOptions<JwtIssuerOptions> jwtOptions)
-        {
-
+        public AuthController(AlexwilkinsonContext context)
+        {          
             _context = context;
-            _jwtOptions = jwtOptions.Value;
-            _jwtFactory = new JwtFactory(jwtOptions);
-
-            _serializerSettings = new JsonSerializerSettings
-            {
-                Formatting = Formatting.Indented
-            };
 
         }
 
@@ -38,23 +32,10 @@ namespace alexwilkinson.Controllers
         [HttpPost("login")]
         public async Task<IActionResult> Post([FromBody]string value)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-            var response = new
-            {
-                title = "Auth output",
-                auth_token =  _jwtFactory.GenerateEncodedToken("test"),
-                expires_in = (int)_jwtOptions.ValidFor.TotalSeconds
-            };
-
-            var json = JsonConvert.SerializeObject(response, _serializerSettings);
-            return new OkObjectResult(json);
-
-
+            return null;
 
         }
-        
+
+
     }
 }
