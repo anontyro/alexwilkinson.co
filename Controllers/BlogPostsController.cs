@@ -87,6 +87,7 @@ namespace websites.Controllers
         }
 
         // PUT: api/BlogPosts/5
+        [Authorize]
         [HttpPut("{id}")]
         public async Task<IActionResult> PutBlogPost([FromRoute] int id, [FromBody] BlogPost blogPost)
         {
@@ -122,6 +123,7 @@ namespace websites.Controllers
         }
 
         // POST: api/BlogPosts
+        [Authorize]
         [HttpPost]
         public async Task<IActionResult> PostBlogPost([FromBody] BlogPost blogPost)
         {
@@ -137,6 +139,7 @@ namespace websites.Controllers
         }
 
         // DELETE: api/BlogPosts/5
+        [Authorize]
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteBlogPost([FromRoute] int id)
         {

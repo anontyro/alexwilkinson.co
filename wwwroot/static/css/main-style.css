@@ -2,6 +2,9 @@
     margin: 0px 0px 0px 0px;
     color: rgb(153, 154, 156);
 }
+body{
+    height: 100%;
+}
 
 a:hover {
     color: #4196ea !important;
