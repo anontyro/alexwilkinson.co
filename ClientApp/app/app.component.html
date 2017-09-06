@@ -3,10 +3,11 @@
         <div>
             <nav-menu (sideNavClosed)="changeSideNavState($event)" *ngIf="isNavOpen"></nav-menu>
         </div>
-        <div class='col-xs-12 body-content' >
-            <router-outlet></router-outlet>
-        </div>
-    <br /><br />
+    
+    <div class='col-xs-12 body-content' >
+       <router-outlet></router-outlet>
+    </div>
+
     <div class="footer-content">
         <app-footer></app-footer>
     </div>

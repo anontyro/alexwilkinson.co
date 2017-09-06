@@ -2,8 +2,9 @@
     margin: 0px 0px 0px 0px;
     color: rgb(153, 154, 156);
 }
-body{
+html, body {
     height: 100%;
+    margin: 0;
 }
 
 a:hover {
