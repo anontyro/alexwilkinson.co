@@ -1,4 +1,5 @@
-﻿import { Component } from '@angular/core'
+﻿import { Component, Input } from '@angular/core';
+import { BlogPost } from './blogpostmodel';
 
 @Component({
     selector: 'blog-post',
@@ -7,5 +8,8 @@
 })
 
 export class BlogPostComponent{
+    @Input()
+    blogPost: BlogPost;
 
+    constructor() { }
 }

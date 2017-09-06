@@ -9,7 +9,7 @@ export class AppComponent {
 
     private isNavOpen: boolean = false;
 
-
+    constructor() { }
 
     public changeSideNavState(changeTo: boolean) {
         console.log(changeTo);

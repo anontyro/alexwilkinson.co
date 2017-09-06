@@ -14,8 +14,8 @@ import { BlogListService } from './services/index';
         ...sharedConfig.imports
     ],
     providers: [
-        BlogListService,
-        { provide: 'ORIGIN_URL', useValue: location.origin }
+        { provide: 'ORIGIN_URL', useValue: location.origin },
+        BlogListService
     ]
 })
 export class AppModule {

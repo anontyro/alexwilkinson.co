@@ -1,4 +1,4 @@
-﻿import { Component, Inject, OnInit } from '@angular/core';
+﻿import { Component, Inject, OnInit, Input } from '@angular/core';
 import { BlogPost } from './blogpost/blogpostmodel';
 
 @Component({
@@ -9,10 +9,13 @@ import { BlogPost } from './blogpost/blogpostmodel';
 
 export class BlogListComponent implements OnInit {
 
-    @Inject('ORIGIN_URL') originUrl: string
 
+    @Input()
+    blogList: BlogPost[];
 
-    constructor() {}
+    constructor(
+        @Inject('ORIGIN_URL') originUrl: string,
+    ) { }
 
 
 

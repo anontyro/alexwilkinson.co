@@ -1,4 +1,6 @@
-﻿import { Component } from '@angular/core'
+﻿import { Component } from '@angular/core';
+import { BlogPost } from './bloglist/blogpost/blogpostmodel';
+import { BlogListService } from '../../services/index';
 
 @Component({
     selector: 'blog-view',
@@ -7,5 +9,14 @@
 })
 
 export class BlogviewComponent{
+    private blogList: Object;
+    constructor(
+        private blogListService: BlogListService,
+    ) {
+        this.blogListService.getList().subscribe(response => {
+            this.blogList = response;
+            console.log(this.blogList);
+        });
+    }
 
 }

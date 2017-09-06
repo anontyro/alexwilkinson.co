@@ -1,7 +1,5 @@
-import { NgModule } from '@angular/core';
-import { RouterModule } from '@angular/router';
-import 'materialize-css';
-import { MaterializeModule } from 'angular2-materialize';
+﻿import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
 
 import { AppComponent } from './app.component'
 import { NavMenuComponent } from './components/navmenu/navmenu.component';
@@ -14,11 +12,28 @@ import { AboutviewComponent } from './components/aboutview/aboutview.component';
 import { BlogviewComponent } from './components/blogview/index';
 import { BlogListComponent } from './components/blogview/index';
 import { BlogPostComponent } from './components/blogview/index';
+
+import { BrowserModule } from '@angular/platform-browser';
+import { FormsModule } from '@angular/forms';
+import { HttpModule } from '@angular/http';
+import { sharedConfig } from './app.module.shared';
+import { ServerModule } from '@angular/platform-server';
+
 import { BlogListService } from './services/index';
 
 
-export const sharedConfig: NgModule = {
-    bootstrap: [ AppComponent ],
+
+export const appRoutes: Routes = [
+    //detail-view will be used for new, update and edit
+    { path: '', redirectTo: 'home', pathMatch: 'full' },
+    { path: 'home', component: HomeComponent },
+    { path: 'blog', component: BlogviewComponent },
+    { path: 'about', component: AboutviewComponent },
+    { path: 'fetch-data', component: FetchDataComponent },
+    { path: '**', redirectTo: 'home' }
+];
+
+@NgModule({
     declarations: [
         AppComponent,
         NavMenuComponent,
@@ -33,14 +48,17 @@ export const sharedConfig: NgModule = {
         AboutviewComponent,
     ],
     imports: [
-        MaterializeModule,
-        RouterModule.forRoot([
-            { path: '', redirectTo: 'home', pathMatch: 'full' },
-            { path: 'home', component: HomeComponent },
-            { path: 'blog', component: BlogviewComponent },
-            { path: 'about', component: AboutviewComponent },
-            { path: 'fetch-data', component: FetchDataComponent },
-            { path: '**', redirectTo: 'home' }
-        ])
-    ]
-};
+        ServerModule,
+        BrowserModule,
+        FormsModule,
+        HttpModule,
+        RouterModule.forRoot(appRoutes, { enableTracing: false })
+    ],
+    providers: [
+        BlogListService,
+        { provide: 'ORIGIN_URL', useValue: location.origin }
+        
+    ],
+    bootstrap: [AppComponent]
+})
+export class AppModule { }
